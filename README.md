@@ -23,3 +23,7 @@ make install # installs GDAL from source
 make apt-install # installs GDAL from ubuntugis-unstable PPA
 
 ```
+
+
+> [!NOTE]
+> There is also a utils directory where I have (and intend to add more) scripts to help resolve random GDAL related issues.
