@@ -11,7 +11,7 @@ There is also an option to install the latest binary version from
 ubuntugis-unstable using apt. 
 
 ## Usage
-First, clone the repository and then run the makefile commands as needed.
+First, clone the repository and then run the makefile commands as needed (simple `make` should do the trick):
 
 ```bash
 make # cleans and builds GDAL from source combination of make cleanup and make install
