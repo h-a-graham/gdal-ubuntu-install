@@ -72,8 +72,9 @@ sudo apt install -y libblosc-dev
 sudo apt install -y libblosc1 python3-blosc
 sudo apt install -y liblz4-1 liblz4-dev libzstd1 libzstd-dev
 
-# Parquet/Arrow support (may not be available in all repositories)
-sudo apt install -y libarrow-dev libparquet-dev
+# Parquet/Arrow support. -dev packages are installed explicitly so apt autoremove
+# won't strip the dataset/acero/compute runtimes that GDAL loads lazily.
+sudo apt install -y libarrow-dev libparquet-dev libarrow-dataset-dev libarrow-acero-dev
 
 # ExprTk and muparser support for VRT expression pixel functions 
 sudo apt install -y libexprtk-dev libmuparser-dev
