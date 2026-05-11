@@ -44,9 +44,17 @@ sudo ldconfig
 
 echo "Adding arrow certificates repository..."
 sudo apt install -y -V ca-certificates lsb-release wget
-wget https://packages.apache.org/artifactory/arrow/$(lsb_release --id --short | tr 'A-Z' 'a-z')/apache-arrow-apt-source-latest-$(lsb_release --codename --short).deb
-sudo apt install -y -V ./apache-arrow-apt-source-latest-$(lsb_release --codename --short).deb
+ARROW_DEB="apache-arrow-apt-source-latest-$(lsb_release --codename --short).deb"
+ARROW_URL="https://packages.apache.org/artifactory/arrow/$(lsb_release --id --short | tr 'A-Z' 'a-z')/${ARROW_DEB}"
+
+if dpkg -s apache-arrow-apt-source &>/dev/null; then
+    echo "apache-arrow-apt-source already installed ($(dpkg-query -W -f='${Version}' apache-arrow-apt-source)); skipping repo config install."
+else
+    wget -N "$ARROW_URL"
+    sudo apt install -y -V "./${ARROW_DEB}"
+fi
 sudo apt update
+sudo apt install -y --only-upgrade libarrow-dev libparquet-dev || true
 
 
 echo "🔨 Installing build dependencies..."
